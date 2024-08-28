@@ -1,22 +1,33 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
+from django.contrib.auth.forms import UserChangeForm, UserCreationForm
 
 from .models import BlogPost, CustomUser
 
-# The class `CustomUserAdmin` extends `UserAdmin` and customizes the admin interface for the
-# `CustomUser` model with specific list display, filters, fieldsets, and search fields.
+
+class CustomUserChangeForm(UserChangeForm):
+    class Meta(UserChangeForm.Meta):
+        model = CustomUser
+
+class CustomUserCreationForm(UserCreationForm):
+    class Meta(UserCreationForm.Meta):
+        model = CustomUser
+        fields = ('email', 'mobile')
+
 class CustomUserAdmin(UserAdmin):
+    form = CustomUserChangeForm
+    add_form = CustomUserCreationForm
     model = CustomUser
     list_display = ('email', 'mobile', 'is_staff', 'is_superuser')
     list_filter = ('is_staff', 'is_superuser')
     fieldsets = (
-        (None, {'fields': ('email', 'mobile', 'pin')}),
+        (None, {'fields': ('email', 'mobile', 'password')}),
         ('Permissions', {'fields': ('is_staff', 'is_superuser')}),
     )
     add_fieldsets = (
         (None, {
             'classes': ('wide',),
-            'fields': ('email', 'mobile', 'pin', 'is_staff', 'is_superuser'),
+            'fields': ('email', 'mobile', 'password1', 'password2', 'is_staff', 'is_superuser'),
         }),
     )
     search_fields = ('email', 'mobile')

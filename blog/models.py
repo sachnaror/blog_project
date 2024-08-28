@@ -1,7 +1,6 @@
-from django.contrib.auth.models import (AbstractBaseUser, BaseUserManager,
-                                        PermissionsMixin)
-from django.core.validators import MaxLengthValidator, MinLengthValidator
 from django.db import models
+from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
+from django.core.validators import MinLengthValidator, MaxLengthValidator
 
 
 class CustomUserManager(BaseUserManager):
@@ -23,14 +22,13 @@ class CustomUserManager(BaseUserManager):
 class CustomUser(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(unique=True)
     mobile = models.CharField(max_length=15, unique=True)
-    pin = models.CharField(max_length=3, validators=[MinLengthValidator(3), MaxLengthValidator(4)])
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
 
     objects = CustomUserManager()
 
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['mobile', 'pin']
+    REQUIRED_FIELDS = ['mobile']
 
     def __str__(self):
         return self.email
