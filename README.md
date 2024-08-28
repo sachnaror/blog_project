@@ -1,4 +1,4 @@
-# Django Blog Application Experiment (to understand few things.)
+# Django Blog App (to understand few concepts)
 
 ## Overview
 

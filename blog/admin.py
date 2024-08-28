@@ -3,7 +3,6 @@ from django.contrib.auth.admin import UserAdmin
 
 from .models import BlogPost, CustomUser
 
-
 # The class `CustomUserAdmin` extends `UserAdmin` and customizes the admin interface for the
 # `CustomUser` model with specific list display, filters, fieldsets, and search fields.
 class CustomUserAdmin(UserAdmin):
@@ -33,7 +32,6 @@ class CustomUserAdmin(UserAdmin):
 # 4. `get_queryset`: This method customizes the queryset of blog posts displayed in the admin interface. If the user is a superuser, all blog posts are displayed. Otherwise, only the blog posts authored by the user are displayed.
 # 5. `has_change_permission`: This method customizes the permission to change a blog post. If the user is a superuser or the author of the blog post, they have permission to change it. Otherwise, they do not.
 # 6. `has_delete_permission`: This method customizes the permission to delete a blog post. If the user is a superuser or the author of the blog post, they have permission to delete it. Otherwise, they do not.
-
 
 
 class BlogPostAdmin(admin.ModelAdmin):
