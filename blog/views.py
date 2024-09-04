@@ -1,7 +1,7 @@
 from django.contrib import messages
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import redirect, render
+from django.shortcuts import get_object_or_404, redirect, render
 
 from .models import BlogPost, CustomUser
 
@@ -23,3 +23,9 @@ def login_view(request):
 def blog_list(request):
     posts = BlogPost.objects.all()
     return render(request, 'blog_list.html', {'posts': posts})
+
+
+
+def blog_detail(request, pk):
+    blog_post = get_object_or_404(BlogPost, pk=pk)
+    return render(request, 'blog_detail.html', {'blog_post': blog_post})

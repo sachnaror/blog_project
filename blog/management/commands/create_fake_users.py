@@ -17,7 +17,7 @@ class Command(BaseCommand):
             try:
                 user = User.objects.create_user(
                     email=email,
-                    mobile=mobile,
+                    mobile=mobile,m1
                     pin=pin
                 )
                 self.stdout.write(self.style.SUCCESS(f'Created user: {email} | Mobile: {mobile} | PIN: {pin}'))
